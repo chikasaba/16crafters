@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>マイクラ活動スタイル診断 | あなたのプレイスタイルは？</title>
+<meta name="description" content="4つの軸・20問の質問から、あなたのマインクラフト活動スタイルを16タイプに診断します。">
+
+<!-- ドット風フォント(見出し用) と 丸ゴシック(本文用) を読み込み -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <!-- 上部の草ブロック風デコレーション -->
+  <div class="deco-strip deco-strip--top" aria-hidden="true">
+    <div class="deco-grass"></div>
+    <div class="deco-dirt"></div>
+  </div>
+
+  <header class="site-header">
+    <h1 class="site-title">マイクラ活動スタイル診断</h1>
+    <p class="site-subtitle">全20問であなたのプレイスタイルを16タイプに分類</p>
+  </header>
+
+  <main id="app" class="app">
+
+    <!-- ============ スタート画面 ============ -->
+    <section id="screen-start" class="screen is-active" aria-labelledby="screen-start-heading">
+      <div class="panel panel--parchment start-panel">
+        <p class="start-icon" aria-hidden="true">⛏️</p>
+        <h2 id="screen-start-heading" class="panel-heading">あなたの冒険スタイルを診断しよう</h2>
+        <p class="start-desc">
+          「開拓と定住」「美観と効率」「協同と自律」「計画と即興」。<br>
+          4つの軸への回答から、あなたのマインクラフトにおける活動スタイルを診断します。
+        </p>
+        <ul class="start-info-list">
+          <li>質問数：<strong>20問</strong>（1問ずつ表示）</li>
+          <li>回答形式：<strong>5段階評価</strong></li>
+          <li>所要時間：<strong>約2分</strong></li>
+        </ul>
+        <button id="btnStart" class="btn btn-primary btn-large" type="button">診断をはじめる</button>
+      </div>
+    </section>
+
+    <!-- ============ 質問画面 ============ -->
+    <section id="screen-quiz" class="screen" aria-labelledby="quiz-heading">
+      <h2 id="quiz-heading" class="visually-hidden">質問</h2>
+
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="progressTrack">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p class="progress-label" id="progressLabel">Q1 / 20</p>
+
+      <div class="panel panel--parchment question-panel">
+        <p class="question-text" id="questionText">質問文がここに入ります</p>
+        <div class="answer-list" id="answerList"><!-- JSで生成 --></div>
+      </div>
+
+      <div class="nav-buttons">
+        <button id="btnBack" class="btn btn-secondary" type="button">戻る</button>
+        <button id="btnNext" class="btn btn-primary" type="button" disabled>次へ</button>
+      </div>
+    </section>
+
+    <!-- ============ 結果画面 ============ -->
+    <section id="screen-result" class="screen" aria-labelledby="resultName">
+
+      <div class="advancement-toast" id="advancementToast">
+        <span class="advancement-icon">🏆</span>
+        <div class="advancement-text">
+          <span class="advancement-label">実績を解除しました</span>
+          <span class="advancement-name" id="advancementName">タイプ名</span>
+        </div>
+      </div>
+
+      <div class="panel panel--parchment result-panel">
+        <p class="result-code" id="resultCode">XACP</p>
+        <h2 id="resultName" class="result-name">タイプ名</h2>
+        <p class="result-desc" id="resultDesc">タイプの説明文</p>
+
+        <div class="axis-bars" id="axisBars"><!-- JSで生成 --></div>
+
+        <div class="traits-block">
+          <h3 class="traits-heading">プレイスタイルの特徴</h3>
+          <ul class="traits-list" id="traitsList"><!-- JSで生成 --></ul>
+        </div>
+      </div>
+
+      <div class="share-panel panel panel--stone">
+        <h3 class="share-heading">結果をシェアする</h3>
+        <div class="share-buttons">
+          <button id="btnCopyUrl" class="btn btn-secondary" type="button">結果URLをコピー</button>
+          <a id="btnShareX" class="btn btn-secondary" href="#" target="_blank" rel="noopener noreferrer">Xでシェア</a>
+        </div>
+        <p class="share-note" id="shareNote" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="nav-buttons">
+        <button id="btnRetry" class="btn btn-primary btn-large" type="button">もう一度診断する</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>本サイトはファンメイドの診断コンテンツです。Minecraft の商標は Mojang Studios に帰属します。</p>
+  </footer>
+
+  <!-- 下部の石・土ブロック風デコレーション -->
+  <div class="deco-strip deco-strip--bottom" aria-hidden="true">
+    <div class="deco-stone"></div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
