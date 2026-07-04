@@ -304,13 +304,56 @@ button:focus-visible {
 /* ==========================================================================
    質問画面
    ========================================================================== */
+/* 戻るボタン + 進捗ラベルを横並びにしたヘッダー行 */
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+/* 戻るボタン: 全幅ではなく小さめのコンパクトな見た目にする */
+.btn-back {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--color-ink);
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid var(--color-parchment-dark);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.btn-back-arrow {
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.btn-back:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: var(--color-gold);
+}
+
+.btn-back:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn-back:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
 .progress-track {
   height: 18px;
   background: var(--color-xp-green-dark);
   border: 3px solid #1c2e0e;
   border-radius: var(--radius-sm);
   overflow: hidden;
-  margin-bottom: 6px;
+  margin-bottom: 16px;
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -322,11 +365,12 @@ button:focus-visible {
 }
 
 .progress-label {
-  text-align: center;
+  text-align: right;
   font-family: var(--font-display);
   font-size: 0.85rem;
   color: var(--color-ink-soft);
-  margin: 0 0 16px;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .question-text {
@@ -371,6 +415,15 @@ button:focus-visible {
   color: #3a2a06;
   font-weight: 700;
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+/* 回答直後、次の質問へ切り替わるまでの待機中は操作を受け付けない */
+.answer-list.is-transitioning .answer-option {
+  pointer-events: none;
+}
+
+.answer-list.is-transitioning .answer-option:not(.is-selected) {
+  opacity: 0.5;
 }
 
 .nav-buttons {

@@ -52,19 +52,20 @@
     <section id="screen-quiz" class="screen" aria-labelledby="quiz-heading">
       <h2 id="quiz-heading" class="visually-hidden">質問</h2>
 
+      <div class="quiz-header">
+        <button id="btnBack" class="btn-back" type="button" aria-label="前の質問に戻る">
+          <span class="btn-back-arrow" aria-hidden="true">←</span>戻る
+        </button>
+        <p class="progress-label" id="progressLabel">Q1 / 20</p>
+      </div>
+
       <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="progressTrack">
         <div class="progress-fill" id="progressFill"></div>
       </div>
-      <p class="progress-label" id="progressLabel">Q1 / 20</p>
 
       <div class="panel panel--parchment question-panel">
         <p class="question-text" id="questionText">質問文がここに入ります</p>
         <div class="answer-list" id="answerList"><!-- JSで生成 --></div>
-      </div>
-
-      <div class="nav-buttons">
-        <button id="btnBack" class="btn btn-secondary" type="button">戻る</button>
-        <button id="btnNext" class="btn btn-primary" type="button" disabled>次へ</button>
       </div>
     </section>
 

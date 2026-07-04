@@ -29,14 +29,15 @@
   const UI_TEXT = {
     ja: {
       progressLabel: (current, total) => `Q${current} / ${total}`,
-      nextButton: '次へ',
-      lastButton: '結果を見る',
       copySuccess: 'URLをコピーしました！',
       copyFailure: 'コピーに失敗しました。手動でURLをコピーしてください。',
       shareXText: (typeName) => `マイクラ活動スタイル診断で「${typeName}」タイプでした！`,
     },
   };
   const t = UI_TEXT[currentLang];
+
+  // 選択肢を選んでから次の質問へ自動で切り替わるまでの待機時間(ミリ秒)
+  const AUTO_ADVANCE_DELAY = 500;
 
   /* ------------------------------------------------------------------
    * 2. 軸データ定義
@@ -292,6 +293,7 @@
     questions: CONFIG.shuffleQuestions ? shuffle([...QUESTIONS]) : QUESTIONS,
     currentIndex: 0,
     answers: [], // 各質問のスコア (null = 未回答)
+    isTransitioning: false, // 自動遷移の待機中は多重操作を防ぐ
   };
   state.answers = new Array(state.questions.length).fill(null);
 
@@ -358,7 +360,6 @@
     questionText: document.getElementById('questionText'),
     answerList: document.getElementById('answerList'),
     btnBack: document.getElementById('btnBack'),
-    btnNext: document.getElementById('btnNext'),
     advancementName: document.getElementById('advancementName'),
     resultCode: document.getElementById('resultCode'),
     resultName: document.getElementById('resultName'),
@@ -388,6 +389,7 @@
 
     // 選択肢を描画
     els.answerList.innerHTML = '';
+    els.answerList.classList.toggle('is-transitioning', state.isTransitioning);
     ANSWER_OPTIONS.forEach((option) => {
       const btn = document.createElement('button');
       btn.type = 'button';
@@ -401,10 +403,8 @@
       els.answerList.appendChild(btn);
     });
 
-    // 戻る/次へボタンの状態
-    els.btnBack.disabled = index === 0;
-    els.btnNext.textContent = index === total - 1 ? t.lastButton : t.nextButton;
-    els.btnNext.disabled = answered === null;
+    // 戻るボタンの状態（先頭の質問、または遷移待機中は操作不可）
+    els.btnBack.disabled = index === 0 || state.isTransitioning;
   }
 
   function renderResultByCode(code) {
@@ -480,8 +480,17 @@
    * ------------------------------------------------------------------ */
 
   function selectAnswer(score) {
+    if (state.isTransitioning) return; // 遷移待機中の連打を無視する
+
     state.answers[state.currentIndex] = score;
-    renderQuestion(); // 選択状態と次へボタンの有効/無効を更新
+    state.isTransitioning = true;
+    renderQuestion(); // 選択状態を表示しつつ、操作をロックする
+
+    // 選択が視覚的に伝わるよう一瞬待ってから自動で次の質問へ切り替える
+    window.setTimeout(() => {
+      state.isTransitioning = false;
+      goNext();
+    }, AUTO_ADVANCE_DELAY);
   }
 
   function goNext() {
@@ -495,7 +504,7 @@
   }
 
   function goBack() {
-    if (state.currentIndex === 0) return;
+    if (state.currentIndex === 0 || state.isTransitioning) return;
     state.currentIndex -= 1;
     renderQuestion();
   }
@@ -516,7 +525,6 @@
   }
 
   els.btnStart.addEventListener('click', startQuiz);
-  els.btnNext.addEventListener('click', goNext);
   els.btnBack.addEventListener('click', goBack);
   els.btnRetry.addEventListener('click', retryQuiz);
 
