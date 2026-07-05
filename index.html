@@ -4,13 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>マイクラ16タイプ診断</title>
-<meta name="description" content="4つの軸・20問の質問から、あなたのマインクラフト活動スタイルを16タイプに診断します。">
+<meta name="description" content="30問でわかる、マインクラフトプレイスタイル診断。あなたの遊び方を16タイプで分析！">
+<meta property="og:title" content="マイクラ16タイプ診断">
+<meta property="og:type" content="website" />
+<meta property="og:description" content="30問でわかる、マインクラフトプレイスタイル診断。あなたの遊び方を16タイプで分析！">
+<meta property="og:url" content="https://chikasaba.github.io/16crafters/" />
+<meta property="og:image" content="https://chikasaba.github.io/16crafters/ogp_card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="マイクラ16タイプ診断" />
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="マイクラ16タイプ診断">
+<meta name="twitter:description" content="30問であなたのMinecraftプレイスタイルを診断。">
+<meta name="twitter:image" content="https://chikasaba.github.io/16crafters/og-image2.png">
 
 <!-- ドット風フォント(見出し用) と 丸ゴシック(本文用) を読み込み -->
+<link rel="icon" href="favicon2.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,7 +38,7 @@
 
   <header class="site-header">
     <h1 class="site-title">マイクラ16タイプ診断</h1>
-    <p class="site-subtitle">全20問であなたのプレイスタイルを16タイプに分類</p>
+    <p class="site-subtitle">全30問であなたのプレイスタイルを16タイプに分類</p>
   </header>
 
   <main id="app" class="app">
@@ -34,15 +47,16 @@
     <section id="screen-start" class="screen is-active" aria-labelledby="screen-start-heading">
       <div class="panel panel--parchment start-panel">
         <p class="start-icon" aria-hidden="true">⛏️</p>
-        <h2 id="screen-start-heading" class="panel-heading">あなたの冒険スタイルを診断しよう</h2>
+        <h2 id="screen-start-heading" class="panel-heading">あなたのプレイスタイルを診断しよう</h2>
         <p class="start-desc">
           「探索と定住」「美観と効率」「共同と孤立」「計画と発想」。<br>
-          4つの軸への回答から、あなたのマインクラフトにおける活動スタイルを診断します。
+          4つの軸への回答から、あなたのマインクラフトサーバーにおける<br>
+          活動スタイルを診断します。
         </p>
         <ul class="start-info-list">
-          <li>質問数：<strong>20問</strong>（1問ずつ表示）</li>
+          <li>質問数：<strong>30問</strong>（1問ずつ表示）</li>
           <li>回答形式：<strong>5段階評価</strong></li>
-          <li>所要時間：<strong>約2分</strong></li>
+          <li>所要時間：<strong>約2~3分</strong></li>
         </ul>
         <button id="btnStart" class="btn btn-primary btn-large" type="button">診断をはじめる</button>
       </div>
@@ -110,7 +124,9 @@
   </main>
 
   <footer class="site-footer">
-    <p>本サイトはファンメイドの診断コンテンツです。Minecraft の商標は Mojang Studios に帰属します。</p>
+    <p>Presented by ちか鯖</p>
+    <p>MinecraftはMojang Studiosの商標です。</p>
+    <p>当サイトは非公式のプロジェクトであり、Mojang Studiosとは関係ありません。</p>
   </footer>
 
   <!-- 下部の石・土ブロック風デコレーション -->

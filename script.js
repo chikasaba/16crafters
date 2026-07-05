@@ -21,7 +21,7 @@
    *    - UI_TEXT はここに言語キーを追加するだけで多言語対応を拡張できる。
    * ------------------------------------------------------------------ */
   const CONFIG = {
-    shuffleQuestions: false, // 拡張ポイント: true にすると出題順がランダムになる
+    shuffleQuestions: true, // 拡張ポイント: true にすると出題順がランダムになる
   };
 
   const currentLang = 'ja'; // 拡張ポイント: 将来的にユーザー設定等から切り替え可能にする
@@ -80,39 +80,43 @@
    * ------------------------------------------------------------------ */
   const QUESTIONS = [
     // --- 探索(Nomad) / 定住(Home) ---
-    { text: '新しいバイオームを見つけると、すぐに探検したくなる', axis: 'settlement', reverse: false },
-    { text: '拠点にじっくり手を加え、少しずつ発展させるのが好きだ', axis: 'settlement', reverse: true },
-    { text: '遠くの村や遺跡を見ると、行ってみたくなる', axis: 'settlement', reverse: false },
-    { text: '同じ場所に長く留まるより、常に移動していたい', axis: 'settlement', reverse: false },
-    { text: '拠点の周辺環境を整備し、住みやすくすることに喜びを感じる', axis: 'settlement', reverse: true },
+    { text: '一つの拠点を長い時間をかけて発展させる遊び方が好きだ', axis: 'settlement', reverse: true },
+    { text: '拠点を離れ、長旅をするのは苦にならない', axis: 'settlement', reverse: false },
+    { text: '新しい土地を探すより、今ある拠点をさらに便利にしたいと思う。', axis: 'settlement', reverse: true },
+    { text: '拠点とは、遠征のための荷物置き場である', axis: 'settlement', reverse: false },
+    { text: 'ワールドを思い返すとき、一番印象に残るのは旅ではなく自分の拠点だ', axis: 'settlement', reverse: true },
+    { text: '一つの場所に留まるより、次々と新しい土地へ拠点を作りたい', axis: 'settlement', reverse: false },
 
     // --- 美観(Design) / 効率(Efficiency) ---
-    { text: '建築するときは、見た目の美しさを最優先する', axis: 'aesthetics', reverse: false },
-    { text: '作業効率が上がるなら、見た目は二の次でよい', axis: 'aesthetics', reverse: true },
+    { text: '作業効率が多少落ちても、外観が良くなる設計のほうがよい', axis: 'aesthetics', reverse: false },
+    { text: '建築は見た目よりも使いやすさを優先したい', axis: 'aesthetics', reverse: true },
     { text: '街並みや景観にこだわり、統一感を大事にする', axis: 'aesthetics', reverse: false },
-    { text: '動線や資材コストを重視して建物を設計する', axis: 'aesthetics', reverse: true },
-    { text: '実用性より美しさを重視した建築物を作りたい', axis: 'aesthetics', reverse: false },
+    { text: '移動距離や動線を短くできるなら、多少景観が崩れても構わない', axis: 'aesthetics', reverse: true },
+    { text: '機能がほとんどなくても、景観のためだけの建築を作ることがある', axis: 'aesthetics', reverse: false },
+    { text: '建築では、家よりも装置を充実させることに達成感を覚える', axis: 'aesthetics', reverse: true },
 
     // --- 共同(Co-op) / 孤立(Solo) ---
-    { text: '誰かと一緒に建築や採掘をすると、より楽しく感じる', axis: 'social', reverse: false },
+    { text: '大きな建築は、一人で作るより誰かと協力して完成させたい', axis: 'social', reverse: false },
     { text: 'マルチプレイでも、自分のペースで一人で進めたい', axis: 'social', reverse: true },
-    { text: 'チームで役割分担して、大きなプロジェクトを進めたい', axis: 'social', reverse: false },
-    { text: '他人に手伝ってもらうより、自分でやり遂げたい', axis: 'social', reverse: true },
-    { text: '仲間と成果を共有し、一緒に喜びたい', axis: 'social', reverse: false },
+    { text: '他のプレイヤーと資源や設備を共有することに楽しさを感じる', axis: 'social', reverse: false },
+    { text: '自分の建築や拠点は、自分だけの判断で自由に作りたい', axis: 'social', reverse: true },
+    { text: '一人で達成するより、みんなで目標を達成した方が嬉しい', axis: 'social', reverse: false },
+    { text: '誰にも気を遣わず、自分のペースだけで遊べる環境を好む', axis: 'social', reverse: true },
 
     // --- 計画(Plan) / 発想(Idea) ---
-    { text: '建築や冒険の前には、必ず計画を立てる', axis: 'planning', reverse: false },
-    { text: 'その場の思いつきで、行動を変えることが多い', axis: 'planning', reverse: true },
-    { text: '設計図やメモを作ってから作業に取り掛かる', axis: 'planning', reverse: false },
-    { text: '準備よりも、まず行動してから考えるタイプだ', axis: 'planning', reverse: true },
-    { text: '目標やスケジュールを決めてから進めたい', axis: 'planning', reverse: false },
+    { text: '建築を始める前に、おおまかな完成形を考えてから作業することが多い', axis: 'planning', reverse: false },
+    { text: '建築中のアイデアで、最初の予定を変えることがよくある', axis: 'planning', reverse: true },
+    { text: '必要な資材を事前に揃えてから建築を始めたい', axis: 'planning', reverse: false },
+    { text: '地形や景色を見ながら、その場で建築内容を決める方が好きだ', axis: 'planning', reverse: true },
+    { text: '大規模な建築は、工程を分けて順番に進める方が性に合っている', axis: 'planning', reverse: false },
+    { text: '完成形が決まっていなくても、とりあえず作り始めることが多い', axis: 'planning', reverse: true },
   ];
 
   /* 回答選択肢: 5段階評価とスコアの対応 */
   const ANSWER_OPTIONS = [
-    { label: '強くそう思う', score: 2 },
+    { label: 'とてもそう思う', score: 2 },
     { label: 'ややそう思う', score: 1 },
-    { label: 'どちらとも言えない', score: 0 },
+    { label: 'どちらともいえない', score: 0 },
     { label: 'あまりそう思わない', score: -1 },
     { label: '全くそう思わない', score: -2 },
   ];
@@ -125,7 +129,7 @@
    * ------------------------------------------------------------------ */
   const TYPE_DATA = {
     NDCP: {
-      name: '絶景を求める探検隊長',
+      name: '偉大なる航海者',
       image: null,
       description: '新天地を求めて突き進みながらも、行く先々の景色や街づくりにこだわりを持つ。仲間と共に大きな目標へ向かって、しっかり計画を練ってから冒険に出るタイプ。',
       traits: [
@@ -135,9 +139,9 @@
       ],
     },
     NDCI: {
-      name: '気まぐれな冒険画家',
+      name: '放浪の画家',
       image: null,
-      description: '思い立ったらすぐ冒険に出る自由人。美しい景色に出会うたびに寄り道し、仲間を誘って即興のプロジェクトを楽しむ。計画よりもその場のひらめきを大切にする。',
+      description: '思い立ったらすぐ冒険に出る自由人。美しい景色に出会うたびに寄り道し、出会った人とはすぐ打ち解けられる。計画よりもその場のひらめきを大切にする。',
       traits: [
         '綺麗な景色を見つけると、その場で建築を始める',
         '仲間を巻き込んで思いつきの冒険を企画する',
@@ -145,9 +149,9 @@
       ],
     },
     NDSP: {
-      name: '孤高の景観設計士',
+      name: '孤高の設計者',
       image: null,
-      description: '誰の手も借りず、自分だけの美意識で新天地を切り拓く。事前にしっかり構想を練り、理想の景観を実現するために単独行動を好む。',
+      description: '誰の手も借りず、自分だけで新天地を切り拓く。事前にしっかり構想を練り、理想の景観を実現するために単独行動を好む。',
       traits: [
         '一人でじっくり土地を選び、設計図を描いてから着手する',
         '景観を損なわないよう、細部までこだわり抜く',
@@ -155,7 +159,7 @@
       ],
     },
     NDSI: {
-      name: '放浪の風景詩人',
+      name: '吟遊詩人',
       image: null,
       description: '気の向くままに旅をし、美しい景色に出会えばそこに留まって創作する自由な魂。計画も仲間も必要とせず、自分の感性だけを頼りに世界を巡る。',
       traits: [
@@ -165,7 +169,7 @@
       ],
     },
     NECP: {
-      name: '資源開発プロジェクトリーダー',
+      name: '開拓地の指導者',
       image: null,
       description: '新しい土地の資源を効率よく活用するため、仲間と綿密な計画を立てて開拓を進める。実用性を重視した拠点網を各地に築いていく。',
       traits: [
@@ -175,7 +179,7 @@
       ],
     },
     NECI: {
-      name: '即断即決の遠征隊',
+      name: '放浪のエンジニア',
       image: null,
       description: 'とにかく前へ進みながら、その場で最適な判断を下していく実践派。仲間と息を合わせ、効率を重視しつつも臨機応変に行動する。',
       traits: [
@@ -185,7 +189,7 @@
       ],
     },
     NESP: {
-      name: '効率重視のソロ探検家',
+      name: '宇宙飛行士',
       image: null,
       description: '単独で新天地を切り拓きながら、常に効率的な動きを追求する。事前準備を怠らず、無駄のない行程で着実に成果を積み上げていく。',
       traits: [
@@ -195,7 +199,7 @@
       ],
     },
     NESI: {
-      name: '気ままなサバイバリスト',
+      name: '荒野のサバイバー',
       image: null,
       description: 'その日の思いつきで新しい土地に飛び込み、限られた資源で効率よく生き抜く一匹狼。計画は最小限に、経験と勘で乗り切っていく。',
       traits: [
@@ -205,7 +209,7 @@
       ],
     },
     HDCP: {
-      name: '街づくりの総合プロデューサー',
+      name: 'ゼネコンマネージャー',
       image: null,
       description: '仲間と力を合わせ、美しく機能的な街を計画的に育てていくまとめ役。長期的なビジョンを持ち、皆が心地よく過ごせる拠点づくりに情熱を注ぐ。',
       traits: [
@@ -215,9 +219,9 @@
       ],
     },
     HDCI: {
-      name: 'みんなで楽しむ装飾職人',
+      name: 'ケーキデコレーター',
       image: null,
-      description: '仲間とワイワイしながら、その場のノリで拠点を彩っていくムードメーカー。計画よりも今この瞬間の楽しさを大切にする。',
+      description: '仲間とワイワイしながら、その場のノリで町を彩っていくムードメーカー。計画よりも今この瞬間の楽しさを大切にする。',
       traits: [
         '仲間とアイデアを出し合いながら装飾を進める',
         '思いつきの企画でイベントや建築を盛り上げる',
@@ -245,7 +249,7 @@
       ],
     },
     HECP: {
-      name: '拠点運営マネージャー',
+      name: '倉庫の番人',
       image: null,
       description: '仲間と協力し、綿密な計画のもとで効率的な拠点運営を行う管理者タイプ。生産ラインや倉庫管理など、裏方の仕組みづくりに長ける。',
       traits: [
@@ -255,7 +259,7 @@
       ],
     },
     HECI: {
-      name: '頼れる現場監督',
+      name: '頼れる現場主任',
       image: null,
       description: '拠点で起きる問題にその場で対応しながら、仲間と協力して効率的に作業を進める実務派。計画よりも臨機応変な判断力が武器。',
       traits: [
@@ -265,7 +269,7 @@
       ],
     },
     HESP: {
-      name: '職人気質の生産マイスター',
+      name: '離島の装置勢',
       image: null,
       description: '一人でコツコツと、計画的に生産システムを構築していく効率追求型の職人。自動化や動線設計にこだわり、無駄のない拠点を作り上げる。',
       traits: [
@@ -275,9 +279,9 @@
       ],
     },
     HESI: {
-      name: '思いつき工房の発明家',
+      name: '紅茶中毒者',
       image: null,
-      description: '拠点にこもり、その場の思いつきで便利な仕掛けや装置を作る一人ぼっちの発明家。計画は立てず、試行錯誤しながら効率的な仕組みを生み出す。',
+      description: '拠点にこもり、思いつきで”便利”な仕掛けや装置を作ってしまう。効率化の鬼でありながら、作るものはどこか常軌を逸している。',
       traits: [
         '思いついたら、すぐに試作を始める',
         '試行錯誤しながら効率的な仕組みを完成させる',
