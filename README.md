@@ -1,1 +1,4 @@
-# playstyle-test
+# マイクラ16タイプ診断
+マインクラフトサーバーでのプレイスタイルについての診断サイトがあれば面白いと思い、作成しました。
+レビューはぜひDiscordサーバーでお聞かせください！
+https://discord.com/invite/JGzyVJjj3s
