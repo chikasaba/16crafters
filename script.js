@@ -37,7 +37,7 @@
   const t = UI_TEXT[currentLang];
 
   // 選択肢を選んでから次の質問へ自動で切り替わるまでの待機時間(ミリ秒)
-  const AUTO_ADVANCE_DELAY = 500;
+  const AUTO_ADVANCE_DELAY = 100;
 
   /* ------------------------------------------------------------------
    * 2. 軸データ定義
@@ -48,23 +48,23 @@
   const AXES = [
     {
       id: 'settlement',
-      left: { code: 'X', label: '開拓', desc: '新しい土地や資源、冒険を求める' },
-      right: { code: 'S', label: '定住', desc: '拠点や街を育てることを好む' },
+      left: { code: 'N', label: '探索/Nomad', desc: '拠点に縛られず、様々な土地を渡り歩く' },
+      right: { code: 'H', label: '定住/Home', desc: '一つの拠点を「育てる」ことに重きを置く' },
     },
     {
       id: 'aesthetics',
-      left: { code: 'A', label: '美観', desc: '景観・世界観・デザインを重視する' },
-      right: { code: 'E', label: '効率', desc: '利便性・生産性・機能性を重視する' },
+      left: { code: 'D', label: '美観/Design', desc: '景観・世界観・デザインを重視する' },
+      right: { code: 'E', label: '効率/Efficiency', desc: '利便性・生産性・機能性を重視する' },
     },
     {
       id: 'social',
-      left: { code: 'C', label: '協同', desc: '他プレイヤーとの共同作業を好む' },
-      right: { code: 'I', label: '自律', desc: '自分のペースで独立して活動することを好む' },
+      left: { code: 'C', label: '共同/Co-Op', desc: '他プレイヤーとの協力・共同作業を好む' },
+      right: { code: 'S', label: '孤立/Solo', desc: '自分のペースで、自分の世界を作りたい' },
     },
     {
       id: 'planning',
-      left: { code: 'P', label: '計画', desc: '事前準備や設計を重視する' },
-      right: { code: 'M', label: '即興', desc: '思いつきやその場の発想で行動する' },
+      left: { code: 'P', label: '計画/Plan', desc: '事前に構想を立て、段階的に実行する' },
+      right: { code: 'I', label: '発想/Idea', desc: 'その場の景観や気分で建築や行動を決める' },
     },
   ];
 
@@ -79,28 +79,28 @@
    *    バランスを取るなら各軸で同数にするのが望ましい。
    * ------------------------------------------------------------------ */
   const QUESTIONS = [
-    // --- 開拓(X) / 定住(S) ---
+    // --- 探索(Nomad) / 定住(Home) ---
     { text: '新しいバイオームを見つけると、すぐに探検したくなる', axis: 'settlement', reverse: false },
     { text: '拠点にじっくり手を加え、少しずつ発展させるのが好きだ', axis: 'settlement', reverse: true },
     { text: '遠くの村や遺跡を見ると、行ってみたくなる', axis: 'settlement', reverse: false },
     { text: '同じ場所に長く留まるより、常に移動していたい', axis: 'settlement', reverse: false },
     { text: '拠点の周辺環境を整備し、住みやすくすることに喜びを感じる', axis: 'settlement', reverse: true },
 
-    // --- 美観(A) / 効率(E) ---
+    // --- 美観(Design) / 効率(Efficiency) ---
     { text: '建築するときは、見た目の美しさを最優先する', axis: 'aesthetics', reverse: false },
     { text: '作業効率が上がるなら、見た目は二の次でよい', axis: 'aesthetics', reverse: true },
     { text: '街並みや景観にこだわり、統一感を大事にする', axis: 'aesthetics', reverse: false },
     { text: '動線や資材コストを重視して建物を設計する', axis: 'aesthetics', reverse: true },
     { text: '実用性より美しさを重視した建築物を作りたい', axis: 'aesthetics', reverse: false },
 
-    // --- 協同(C) / 自律(I) ---
+    // --- 共同(Co-op) / 孤立(Solo) ---
     { text: '誰かと一緒に建築や採掘をすると、より楽しく感じる', axis: 'social', reverse: false },
     { text: 'マルチプレイでも、自分のペースで一人で進めたい', axis: 'social', reverse: true },
     { text: 'チームで役割分担して、大きなプロジェクトを進めたい', axis: 'social', reverse: false },
     { text: '他人に手伝ってもらうより、自分でやり遂げたい', axis: 'social', reverse: true },
     { text: '仲間と成果を共有し、一緒に喜びたい', axis: 'social', reverse: false },
 
-    // --- 計画(P) / 即興(M) ---
+    // --- 計画(Plan) / 発想(Idea) ---
     { text: '建築や冒険の前には、必ず計画を立てる', axis: 'planning', reverse: false },
     { text: 'その場の思いつきで、行動を変えることが多い', axis: 'planning', reverse: true },
     { text: '設計図やメモを作ってから作業に取り掛かる', axis: 'planning', reverse: false },
@@ -110,11 +110,11 @@
 
   /* 回答選択肢: 5段階評価とスコアの対応 */
   const ANSWER_OPTIONS = [
-    { label: 'そう思う', score: 2 },
-    { label: 'どちらかといえばそう思う', score: 1 },
-    { label: 'どちらでもない', score: 0 },
-    { label: 'どちらかといえばそう思わない', score: -1 },
-    { label: 'そう思わない', score: -2 },
+    { label: '強くそう思う', score: 2 },
+    { label: 'ややそう思う', score: 1 },
+    { label: 'どちらとも言えない', score: 0 },
+    { label: 'あまりそう思わない', score: -1 },
+    { label: '全くそう思わない', score: -2 },
   ];
 
   /* ------------------------------------------------------------------
@@ -124,7 +124,7 @@
    *    render 側が自動的に画像を表示する（下記 renderResult 参照）。
    * ------------------------------------------------------------------ */
   const TYPE_DATA = {
-    XACP: {
+    NDCP: {
       name: '絶景を求める探検隊長',
       image: null,
       description: '新天地を求めて突き進みながらも、行く先々の景色や街づくりにこだわりを持つ。仲間と共に大きな目標へ向かって、しっかり計画を練ってから冒険に出るタイプ。',
@@ -134,7 +134,7 @@
         '仲間と役割分担しながら大規模な遠征を成功させる',
       ],
     },
-    XACM: {
+    NDCI: {
       name: '気まぐれな冒険画家',
       image: null,
       description: '思い立ったらすぐ冒険に出る自由人。美しい景色に出会うたびに寄り道し、仲間を誘って即興のプロジェクトを楽しむ。計画よりもその場のひらめきを大切にする。',
@@ -144,7 +144,7 @@
         '準備不足でも、なんとかなると笑って進む',
       ],
     },
-    XAIP: {
+    NDSP: {
       name: '孤高の景観設計士',
       image: null,
       description: '誰の手も借りず、自分だけの美意識で新天地を切り拓く。事前にしっかり構想を練り、理想の景観を実現するために単独行動を好む。',
@@ -154,7 +154,7 @@
         '干渉されない環境で自分の世界観を追求する',
       ],
     },
-    XAIM: {
+    NDSI: {
       name: '放浪の風景詩人',
       image: null,
       description: '気の向くままに旅をし、美しい景色に出会えばそこに留まって創作する自由な魂。計画も仲間も必要とせず、自分の感性だけを頼りに世界を巡る。',
@@ -164,7 +164,7 @@
         '一人の時間の中で創造性を発揮する',
       ],
     },
-    XECP: {
+    NECP: {
       name: '資源開発プロジェクトリーダー',
       image: null,
       description: '新しい土地の資源を効率よく活用するため、仲間と綿密な計画を立てて開拓を進める。実用性を重視した拠点網を各地に築いていく。',
@@ -174,7 +174,7 @@
         'チームで役割を分担し、開拓のスピードを上げる',
       ],
     },
-    XECM: {
+    NECI: {
       name: '即断即決の遠征隊',
       image: null,
       description: 'とにかく前へ進みながら、その場で最適な判断を下していく実践派。仲間と息を合わせ、効率を重視しつつも臨機応変に行動する。',
@@ -184,7 +184,7 @@
         '立ち止まって考えるより、動きながら考える',
       ],
     },
-    XEIP: {
+    NESP: {
       name: '効率重視のソロ探検家',
       image: null,
       description: '単独で新天地を切り拓きながら、常に効率的な動きを追求する。事前準備を怠らず、無駄のない行程で着実に成果を積み上げていく。',
@@ -194,7 +194,7 @@
         '誰にも頼らず、自己完結した開拓を進める',
       ],
     },
-    XEIM: {
+    NESI: {
       name: '気ままなサバイバリスト',
       image: null,
       description: 'その日の思いつきで新しい土地に飛び込み、限られた資源で効率よく生き抜く一匹狼。計画は最小限に、経験と勘で乗り切っていく。',
@@ -204,7 +204,7 @@
         '誰の指図も受けず、自分のスタイルを貫く',
       ],
     },
-    SACP: {
+    HDCP: {
       name: '街づくりの総合プロデューサー',
       image: null,
       description: '仲間と力を合わせ、美しく機能的な街を計画的に育てていくまとめ役。長期的なビジョンを持ち、皆が心地よく過ごせる拠点づくりに情熱を注ぐ。',
@@ -214,7 +214,7 @@
         'みんなの意見をまとめてプロジェクトを推進する',
       ],
     },
-    SACM: {
+    HDCI: {
       name: 'みんなで楽しむ装飾職人',
       image: null,
       description: '仲間とワイワイしながら、その場のノリで拠点を彩っていくムードメーカー。計画よりも今この瞬間の楽しさを大切にする。',
@@ -224,7 +224,7 @@
         '完璧さより、一緒に楽しむ過程を重視する',
       ],
     },
-    SAIP: {
+    HDSP: {
       name: '孤高の建築家',
       image: null,
       description: '自分だけの美学に基づき、じっくりと設計を練ってから理想の建物を作り上げる職人肌。誰にも邪魔されない環境で創作に没頭する。',
@@ -234,7 +234,7 @@
         '一人の時間を大切にし、自分のペースを守る',
       ],
     },
-    SAIM: {
+    HDSI: {
       name: '気の向くままの庭師',
       image: null,
       description: '拠点の中で、その日の気分に任せて庭や花壇を手入れする自由な創作者。計画は立てず、感性の赴くままに美しい空間を作り上げる。',
@@ -244,7 +244,7 @@
         '一人静かに創作の時間を楽しむ',
       ],
     },
-    SECP: {
+    HECP: {
       name: '拠点運営マネージャー',
       image: null,
       description: '仲間と協力し、綿密な計画のもとで効率的な拠点運営を行う管理者タイプ。生産ラインや倉庫管理など、裏方の仕組みづくりに長ける。',
@@ -254,7 +254,7 @@
         'チームの生産性を最大化する仕組みを考える',
       ],
     },
-    SECM: {
+    HECI: {
       name: '頼れる現場監督',
       image: null,
       description: '拠点で起きる問題にその場で対応しながら、仲間と協力して効率的に作業を進める実務派。計画よりも臨機応変な判断力が武器。',
@@ -264,7 +264,7 @@
         '状況に応じて柔軟に方針を変える',
       ],
     },
-    SEIP: {
+    HESP: {
       name: '職人気質の生産マイスター',
       image: null,
       description: '一人でコツコツと、計画的に生産システムを構築していく効率追求型の職人。自動化や動線設計にこだわり、無駄のない拠点を作り上げる。',
@@ -274,7 +274,7 @@
         '誰にも頼らず、着実に成果を積み上げる',
       ],
     },
-    SEIM: {
+    HESI: {
       name: '思いつき工房の発明家',
       image: null,
       description: '拠点にこもり、その場の思いつきで便利な仕掛けや装置を作る一人ぼっちの発明家。計画は立てず、試行錯誤しながら効率的な仕組みを生み出す。',
@@ -451,11 +451,15 @@
       const maxScore = maxScores[axis.id] || 1;
       const dominant = score >= 0 ? 'left' : 'right';
 
-      // マーカー位置(0-100%)。中央(50%)を基準に左右へ振れる。
-      const ratio = Math.max(-1, Math.min(1, score / maxScore));
-      const markerPercent = 50 + ratio * 50;
-      const fillLeft = ratio >= 0 ? 50 : markerPercent;
-      const fillWidth = Math.abs(markerPercent - 50);
+     // マーカー位置(0-100%)。中央(50%)を基準に左右へ振れる。
+    const ratio = Math.max(-1, Math.min(1, score / maxScore));
+
+    // ratio に -1 を掛けることで、プラスとマイナスの方向を反転させる
+    const invertedRatio = -ratio; 
+
+    const markerPercent = 50 + invertedRatio * 50;
+    const fillLeft = invertedRatio >= 0 ? 50 : markerPercent;
+    const fillWidth = Math.abs(markerPercent - 50);
 
       const wrapper = document.createElement('div');
       wrapper.className = 'axis-bar-item';
