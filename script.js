@@ -80,12 +80,12 @@
    * ------------------------------------------------------------------ */
   const QUESTIONS = [
     // --- 探索(Nomad) / 定住(Home) ---
-    { text: '一つの拠点を長い時間をかけて発展させる遊び方が好きだ', axis: 'settlement', reverse: true },
-    { text: '拠点を離れ、長旅をするのは苦にならない', axis: 'settlement', reverse: false },
-    { text: '新しい土地を探すより、今ある拠点をさらに便利にしたいと思う。', axis: 'settlement', reverse: true },
-    { text: '拠点とは、遠征のための荷物置き場である', axis: 'settlement', reverse: false },
-    { text: 'ワールドを思い返すとき、一番印象に残るのは旅ではなく自分の拠点だ', axis: 'settlement', reverse: true },
-    { text: '一つの場所に留まるより、次々と新しい土地へ拠点を作りたい', axis: 'settlement', reverse: false },
+    { text: '拠点を少しずつ発展させていく過程そのものが楽しい', axis: 'settlement', reverse: true },
+    { text: '未知の土地を探索している時間が一番ワクワクする', axis: 'settlement', reverse: false },
+    { text: '危険な場所へ向かうより、まず拠点を充実させたい', axis: 'settlement', reverse: true },
+    { text: '冒険や遠征のためなら、長距離の移動も苦にならない', axis: 'settlement', reverse: false },
+    { text: 'ワールドで一番愛着があるのは、自分が育てた拠点だ', axis: 'settlement', reverse: true },
+    { text: '新しいバイオームや構造物を見つけると、つい足を運びたくなる', axis: 'settlement', reverse: false },
 
     // --- 美観(Design) / 効率(Efficiency) ---
     { text: '作業効率が多少落ちても、外観が良くなる設計のほうがよい', axis: 'aesthetics', reverse: false },
