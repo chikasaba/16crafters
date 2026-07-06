@@ -79,7 +79,7 @@
    *    バランスを取るなら各軸で同数にするのが望ましい。
    * ------------------------------------------------------------------ */
   const QUESTIONS = [
-    // --- 探索(Nomad) / 定住(Home) ---
+    // --- 探索(Nomad) / 定住(Home) V2---
     { text: '拠点を少しずつ発展させていく過程そのものが楽しい', axis: 'settlement', reverse: true },
     { text: '未知の土地を探索している時間が一番ワクワクする', axis: 'settlement', reverse: false },
     { text: '危険な場所へ向かうより、まず拠点を充実させたい', axis: 'settlement', reverse: true },
